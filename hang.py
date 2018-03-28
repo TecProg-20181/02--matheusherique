@@ -3,6 +3,25 @@ import string
 
 WORDLIST_FILENAME = "palavras.txt"
 
+class Word():
+    def __init__ (self, secretWord, lettersGuessed):
+        self.secretWord = secretWord
+        self.lettersGuessed = lettersGuessed
+
+    def isWordGuessed(Word):
+        secretLetters = []
+        lettersGuessed = []
+
+        for letter in secretWord:
+            if letter in lettersGuessed:
+                pass
+            else:
+                return False
+
+        return True
+
+
+
 def loadWords():
     """
     Depending on the size of the word list, this function may
@@ -19,22 +38,7 @@ def loadWords():
     return random.choice(wordlist)
 
 
-def isWordGuessed(secretWord, lettersGuessed):
-    secretLetters = []
 
-#    for letter in secretWord:
-#        if letter in secretLetters:
-#            secretLetters.append(letter)
-#        else:
-#            pass
-
-    for letter in secretWord:
-        if letter in lettersGuessed:
-            pass
-        else:
-            return False
-
-    return True
 
 def getGuessedWord():
 
@@ -59,7 +63,9 @@ def hangman(secretWord):
     print 'I am thinking of a word that is', len(secretWord), ' letters long.'
     print '-------------'
 
-    while  isWordGuessed(secretWord, lettersGuessed) == False and guesses >0:
+    word = Word(secretWord, lettersGuessed)
+
+    while word.isWordGuessed() == False and guesses >0:
         print 'You have ', guesses, 'guesses left.'
 
         available = getAvailableLetters()
