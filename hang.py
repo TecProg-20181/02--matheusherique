@@ -6,15 +6,13 @@ import string
 WORDLIST_FILENAME = "palavras.txt"
 
 
-class Word():
-    def __init__(self, secretWord, lettersGuessed):
-        self.secretWord = secretWord
-        self.lettersGuessed = lettersGuessed
-
-    def isWordGuessed(Word):
+class Word(object):
+    def __init__(self):
         secretLetters = []
         lettersGuessed = []
 
+    def isWordGuessed(self):
+        lettersGuessed = []
         for letter in secretWord:
             if letter in lettersGuessed:
                 pass
@@ -24,7 +22,7 @@ class Word():
         return True
 
 
-class Hangman():
+class Hangman(object):
     def stickman(self, guesses):
 
         if guesses == 8:
@@ -44,49 +42,49 @@ class Hangman():
         elif guesses == 6:
             print "________      "
             print "|      |      "
-            print "|      ˜      "
+            print "|      😄      "
             print "|             "
             print "|             "
             print "|             "
         elif guesses == 5:
             print "________      "
             print "|      |      "
-            print "|      õ      "
+            print "|      😅      "
             print "|             "
             print "|             "
             print "|             "
         elif guesses == 4:
             print "________      "
             print "|      |      "
-            print "|      õ      "
+            print "|      😳      "
             print "|      |      "
             print "|             "
             print "|             "
         elif guesses == 3:
             print "________      "
             print "|      |      "
-            print "|      õ      "
+            print "|      😥      "
             print "|     /|      "
             print "|             "
             print "|             "
         elif guesses == 2:
             print "________      "
             print "|      |      "
-            print "|      õ      "
+            print "|      😰      "
             print "|     /|\     "
             print "|             "
             print "|             "
         elif guesses == 1:
             print "________      "
             print "|      |      "
-            print "|      õ      "
+            print "|      😭      "
             print "|     /|\     "
             print "|     /       "
             print "|             "
         else:
             print "________      "
             print "|      |      "
-            print "|     \õ/     "
+            print "|     \☠️/     "
             print "|      |      "
             print "|     / \     "
             print "|             "
@@ -134,7 +132,7 @@ def main(secretWord):
     print '-------------'
 
     hangman = Hangman()
-    word = Word(secretWord, lettersGuessed)
+    word = Word()
 
     while word.isWordGuessed() == False and guesses > 0:
         print 'You have ', guesses, 'guesses left.'
