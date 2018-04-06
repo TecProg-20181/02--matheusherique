@@ -37,9 +37,9 @@ class Word(object):
         return random.choice(wordlist)
 
     def countLetter(self, secretWord, lettersGuessed):
-        guessed = getGuessedWord()
-        for letter in self.secretWord:
-            if letter in self.lettersGuessed:
+        guessed = self.getGuessedWord()
+        for letter in secretWord:
+            if letter in lettersGuessed:
                 guessed += letter
             else:
                 guessed += '_ '
@@ -52,6 +52,12 @@ class Word(object):
         available = string.ascii_lowercase
 
         return available
+
+    def getGuessedWord(self):
+
+        guessed = ''
+
+        return guessed
 
 
 class Hangman(Word):
@@ -124,20 +130,13 @@ class Hangman(Word):
             print "|     / \     "
             print "|             "
 
-
-def getGuessedWord():
-
-    guessed = ''
-
-    return guessed
-
 def main():
 
     guesses = 8
     lettersGuessed = []
     hangman = Hangman(guesses)
     word = Word(guesses)
-    
+
     print 'Welcome to the game, Hangman!'
     print 'I am thinking of a word that is', len(hangman.secretWord), ' letters long.'
     print '-------------'
@@ -154,17 +153,20 @@ def main():
         letter = raw_input('Please guess a letter: ')
         if letter in hangman.lettersGuessed:
             hangman.lettersGuessed.append(letter)
+
             guessed = word.countLetter(hangman.secretWord,hangman.lettersGuessed)
 
             print 'Oops! You have already guessed that letter: ', guessed
         elif letter in hangman.secretWord:
             hangman.lettersGuessed.append(letter)
+
             guessed = word.countLetter(hangman.secretWord,hangman.lettersGuessed)
             print 'Good Guess: ', guessed
 
         else:
             guesses -= 1
             hangman.lettersGuessed.append(letter)
+
             guessed = word.countLetter(hangman.secretWord,hangman.lettersGuessed)
             print 'Oops! That letter is not in my word: ',  guessed
 
