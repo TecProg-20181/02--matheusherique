@@ -1,54 +1,56 @@
 from classes.hangman import Hangman
 from classes.word import Word
 
+
 def main():
 
     guesses, lettersGuessed = 8, []
     hangman, word = Hangman(guesses), Word(guesses)
+    secretWord, lettersGuessed = hangman.secretWord, hangman.lettersGuessed
 
     print 'Welcome to the game, Hangman!'
-    print 'I am thinking of a word that is', len(hangman.secretWord), ' letters long.'
+    print 'I am thinking of a word that is', len(secretWord), ' letters long.'
     print '-------------'
 
-    while hangman.isWordGuessed() == False and guesses > 0:
+    while hangman.is_word_guessed() == False and guesses > 0:
         print 'You have ', guesses, 'guesses left.'
         hangman.stickman(guesses)
-        available = word.getAvailableLetters()
+        available = word.get_available_letters()
         for letter in available:
-            if letter in hangman.lettersGuessed:
+            if letter in lettersGuessed:
                 available = available.replace(letter, '')
 
         print 'Available letters', available
         letter = raw_input('Please guess a letter: ')
-        if letter in hangman.lettersGuessed:
-            hangman.lettersGuessed.append(letter)
+        if letter in lettersGuessed:
+            lettersGuessed.append(letter)
 
-            guessed = word.countLetter(hangman.secretWord,hangman.lettersGuessed)
+            guessed = word.letter_guessed(secretWord, lettersGuessed)
 
             print 'Oops! You have already guessed that letter: ', guessed
-        elif letter in hangman.secretWord:
-            hangman.lettersGuessed.append(letter)
+        elif letter in secretWord:
+            lettersGuessed.append(letter)
 
-            guessed = word.countLetter(hangman.secretWord,hangman.lettersGuessed)
+            guessed = word.letter_guessed(secretWord, lettersGuessed)
             print 'Good Guess: ', guessed
 
         else:
             guesses -= 1
-            hangman.lettersGuessed.append(letter)
+            lettersGuessed.append(letter)
 
-            guessed = word.countLetter(hangman.secretWord,hangman.lettersGuessed)
+            guessed = word.letter_guessed(secretWord, lettersGuessed)
             print 'Oops! That letter is not in my word: ',  guessed
 
         print '------------'
 
     else:
-        if hangman.isWordGuessed() == True:
+        if hangman.is_word_guessed() == True:
             hangman.stickman(guesses)
             print 'Congratulations, you won!'
 
         else:
             hangman.stickman(guesses)
-            print 'Sorry, you ran out of guesses. The word was ', hangman.secretWord, '.'
+            print 'Sorry, you ran out of guesses. The word was ', secretWord, '.'
 
 
 main()

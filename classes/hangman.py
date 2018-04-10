@@ -2,6 +2,7 @@
 
 from classes.word import Word
 
+
 class Hangman(Word):
     def __init__(self, guesses):
         Word.__init__(self, guesses=guesses)
