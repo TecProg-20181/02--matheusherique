@@ -1,56 +1,47 @@
-import string
-import random
-
-WORDLIST_FILENAME = "palavras.txt"
-
+from classes.input import Input
 
 class Word(object):
+    """Class with all methods used in words of the game
+
+    Attributes:
+        secret_word (str): It`s the secret word that the user has to guess.
+        letters_guessed (str): It`s the letter of the word that the user guessed.
+        guesses (int): It`s the number of guesses that user has yet.
+
+    """
     def __init__(self, guesses):
-        self.secretWord = self.__load_words().lower()
-        self.lettersGuessed = []
+        self.secret_word = Input().load_words().lower()
+        self.letters_guessed = []
         self.guesses = guesses
 
     def is_word_guessed(self):
-        for letter in self.secretWord:
-            if letter in self.lettersGuessed:
+        for letter in self.secret_word:
+            if letter in self.letters_guessed:
                 pass
             else:
                 return False
 
         return True
 
-    def __load_words(self):
-        """
-        Depending on the size of the word list, this function may
-        take a while to finish.
-        """
-        print "Loading word list from file..."
-        # inFile: file
-        inFile = open(WORDLIST_FILENAME, 'r', 0)
-        # line: string
-        line = inFile.readline()
-        # wordlist: list of strings
-        wordlist = string.split(line)
-        print "  ", len(wordlist), "words loaded."
-        return random.choice(wordlist)
-
-    def letter_guessed(self, secretWord, lettersGuessed):
+    def letter_guessed(self, secret_word, letters_guessed):
         guessed = self.get_guessed_word()
-        for letter in secretWord:
-            if letter in lettersGuessed:
+        for letter in secret_word:
+            if letter in letters_guessed:
                 guessed += letter
             else:
                 guessed += '_ '
         return guessed
 
-    def get_available_letters(self):
+    @classmethod
+    def get_available_letters(cls):
         import string
         # 'abcdefghijklmnopqrstuvwxyz'
         available = string.ascii_lowercase
 
         return available
 
-    def get_guessed_word(self):
+    @classmethod
+    def get_guessed_word(cls):
 
         guessed = ''
 
