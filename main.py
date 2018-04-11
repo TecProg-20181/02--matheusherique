@@ -4,12 +4,13 @@ from classes.word import Word
 
 def main():
 
-    guesses, letters_guessed = 8, []
+    guesses = 8
     hangman, word = Hangman(guesses), Word(guesses)
     secret_word, letters_guessed = hangman.secret_word, hangman.letters_guessed
 
     print'Welcome to the game, Hangman!'
     print'I am thinking of a word that is', len(secret_word), ' letters long.'
+    word.join_letters(secret_word)
     print'-------------'
 
     while not hangman.is_word_guessed() and guesses > 0:

@@ -14,6 +14,10 @@ class Word(object):
         self.letters_guessed = []
         self.guesses = guesses
 
+    def join_letters(self, secret_word):
+        join_letters = ''.join(set(secret_word))
+        print"\nThe word has ", len(join_letters), " different letters"
+
     def is_word_guessed(self):
         for letter in self.secret_word:
             if letter in self.letters_guessed:

@@ -39,4 +39,9 @@ class Input(object):
         # wordlist: list of strings
         wordlist = string.split(line)
         print"  ", len(wordlist), "words loaded."
-        return random.choice(wordlist)
+        random_choice_word = random.choice(wordlist)
+        join_letters = ''.join(set(random_choice_word))
+
+        while(len(join_letters) > 8):
+            random_choice_word = random.choice(wordlist)
+        return random_choice_word
